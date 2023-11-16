@@ -46,32 +46,34 @@ $Lista = $Lista_repositorio->consulta_criado($_GET['nome'], $_SESSION['idPessoa'
       <br><br>
       <h1 class="header center orange-text"><?php echo $Lista[1]; ?></h1>
       <div class="row center">
-        <h5 class="header col s12 light">Informe o título da lista</h5>
+        <h5 class="header col s12 light">Informe os itens da lista logo abaixo</h5>
       </div>
 
 
       <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="nome" type="text" name="nome" class="validate">
-              <label for="nome">Nome da lista:</label>
-            </div>
-          </div>
-          <div class="row center">
-            <button class="btn-large waves-effect waves-light orange center"> Cadastrar</button>
-          </div>
-        </form>
+        <br>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Quantidade de itens</th>
+              <th>Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
 
 
     </div>
+  </div>
 
 
-    <br><br><br>
-    <br><br><br>
-    <br>
-    <?php require_once "Recursos/footer.php"; ?>
+  <br><br><br>
+  <br><br><br>
+  <br>
+  <?php require_once "Recursos/footer.php"; ?>
 
 </body>
 
