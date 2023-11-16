@@ -8,6 +8,10 @@
 
 require_once "conexao.php";
 
+if (isset($_SESSION['logado']) && $_SESSION['logado'] == "LOGADO"){
+    header("Location: home.php");
+ }
+
 // Pessoas Section
 require_once "../Model/Pessoas_repositorio.php";
 

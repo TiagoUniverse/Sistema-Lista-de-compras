@@ -1,4 +1,13 @@
 <?php
+/**
+ * Classe: login
+ * Descrição: Tela de login
+ * Data: 15/11/23
+ */
+
+ require_once "conexao.php";
+
+require_once "Recursos/ta_logado.php";
 
 ?>
 
