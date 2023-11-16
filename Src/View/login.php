@@ -17,10 +17,13 @@ $Pessoas_repositorio = new Pessoas_repositorio();
 
 
 if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONTA"){
-    echo "real";
+    $email = $_POST['email'];
+    $senha = $_POST['pass'];
+    
+    $Pessoa = $Pessoas_repositorio->login($email, $senha, $pdo);
+    var_dump($Pessoa);
 }
 
-$Pessoa = $Pessoas_repositorio->login("tiagocesar68@gmail.com", "tiago123", $pdo);
 
 ?>
 <!DOCTYPE html>
