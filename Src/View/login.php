@@ -20,7 +20,7 @@ use model\Pessoas_repositorio;
 $Pessoas_repositorio = new Pessoas_repositorio();
 
 
-$login_sucesso = null;
+$login_sucesso = true;
 if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONTA") {
     $email = $_POST['email'];
     $senha = $_POST['pass'];

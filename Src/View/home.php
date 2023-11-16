@@ -24,18 +24,8 @@ require_once "Recursos/ta_logado.php";
   <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
+  <?php require_once "Recursos/navBar.php"; ?>
 
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
@@ -118,18 +108,8 @@ require_once "Recursos/ta_logado.php";
         </div>
       </div>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Desenvolvido por <a class="orange-text text-lighten-3" href="https://github.com/TiagoUniverse">Tiago César Lopes (Tiago Universe)</a>
-      </div>
-    </div>
-  </footer>
-
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../../Assets/js/materialize.js"></script>
-  <script src="../../Assets/js/init.js"></script>
+   
+    <?php  require_once "Recursos/footer.php"; ?>
 
   </body>
 </html>
