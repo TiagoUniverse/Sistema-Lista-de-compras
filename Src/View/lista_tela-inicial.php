@@ -11,6 +11,15 @@ require_once "conexao.php";
 require_once "Recursos/ta_logado.php";
 
 
+// Lista
+require_once "../Model/Lista_repositorio.php";
+
+use model\Lista_repositorio;
+
+$Lista_repositorio = new Lista_repositorio();
+
+$Lista = $Lista_repositorio->consulta_criado($_GET['nome'], $_SESSION['idPessoa'], $pdo);
+
 
 
 ?>
@@ -21,7 +30,7 @@ require_once "Recursos/ta_logado.php";
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>consulta</title>
+  <title> <?php echo $Lista[1]; ?> </title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -35,7 +44,7 @@ require_once "Recursos/ta_logado.php";
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center orange-text">Consulta</h1>
+      <h1 class="header center orange-text"><?php echo $Lista[1]; ?></h1>
       <div class="row center">
         <h5 class="header col s12 light">Informe o título da lista</h5>
       </div>
