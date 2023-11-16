@@ -14,6 +14,12 @@ require_once "../Model/Pessoas_repositorio.php";
 use model\Pessoas_repositorio;
 
 $Pessoas_repositorio = new Pessoas_repositorio();
+
+
+if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONTA"){
+    echo "real";
+}
+
 $Pessoa = $Pessoas_repositorio->login("tiagocesar68@gmail.com", "tiago123", $pdo);
 
 ?>
@@ -51,7 +57,8 @@ $Pessoa = $Pessoas_repositorio->login("tiagocesar68@gmail.com", "tiago123", $pdo
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('../../Assets/Img/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form action="login.php" method="POST" class="login100-form validate-form">
+                    <input type="hidden" name="status_login" value="ACESSANDO A CONTA">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
