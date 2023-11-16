@@ -21,7 +21,11 @@ if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONT
     $senha = $_POST['pass'];
     
     $Pessoa = $Pessoas_repositorio->login($email, $senha, $pdo);
-    var_dump($Pessoa);
+
+    if ($Pessoa == null){
+        echo "tá vazio";
+    }
+
 }
 
 
