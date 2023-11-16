@@ -59,7 +59,6 @@ $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
           <tr>
             <th>Nome</th>
             <th>Quantidade de itens</th>
-            <th>Opções</th>
             <th>Excluir</th>
           </tr>
         </thead>
@@ -67,14 +66,38 @@ $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
           <?php
           foreach ($Listas_array as $lista) {
             $link = "lista_tela-inicial.pHp?nome=" . $lista[1];
-            ?>
+            $modalId = 'modal-' . $lista[0]; // Unique ID for each modal
+          ?>
 
             <tr>
-              <th><a href="<?php echo $link; ?>">  <?php echo $lista[1]; ?> </a> </th> 
-              <th>0</th>
+              <td><a href="<?php echo $link; ?>"> <?php echo $lista[1]; ?> </a> </td>
+              <td>0</td>
+              <td>
+                <!-- Modal Trigger -->
+                <a class='waves-effect #ef5350 red lighten-1 btn modal-trigger' href='#<?php echo $modalId; ?>'>Excluir</a>
+
+                <!-- Modal Structure -->
+                <div id='<?php echo $modalId; ?>' class='modal'>
+                  <div class='modal-content'>
+                    <h4>Exclusão de Lista</h4>
+                    <p>Você está prestes a deletar esta lista. Você tem certeza?</p>
+                  </div>
+
+                  <div class='modal-footer'>
+                    <a href='#!' class='modal-close waves-effect waves-green btn-flat' style="display:inline;">Cancelar</a>
+                    <form action='meusGrupos.php' method='post' class='exclusao-form' style="display:inline;">
+                      <input type='hidden' name='status_exclusao' value='EXCLUINDO Lista'>
+                      <input type='hidden' name='nomeGrupo' value="<?php echo $lista[0]; ?>">
+                      <button type='submit' class='modal-close #ef5350 red lighten-1 btn-flat'>Deletar</button>
+                    </form>
+                  </div>
+                </div>
+              </td>
+
             </tr>
 
-            <?php
+
+          <?php
           }
           ?>
         </tbody>
@@ -88,6 +111,8 @@ $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
   <br><br><br>
   <br><br><br>
   <br>
+
+
   <?php require_once "Recursos/footer.php"; ?>
 
 </body>
