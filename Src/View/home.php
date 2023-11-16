@@ -10,6 +10,16 @@ require_once "conexao.php";
 
 require_once "Recursos/ta_logado.php";
 
+// Lista
+require_once "../Model/Lista_repositorio.php";
+
+use model\Lista_repositorio;
+
+$Lista_repositorio = new Lista_repositorio();
+
+$Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,30 +52,42 @@ require_once "Recursos/ta_logado.php";
       <br><br>
 
 
-      
-  <br>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Quantidade de itens</th>
-        <th>Opções</th>
-        <th>Excluir</th>
-      </tr>
-    </thead>
-    <tbody>
 
-    </tbody>
-  </table>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Quantidade de itens</th>
+            <th>Opções</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($Listas_array as $lista) {
+            $link = "lista_tela-inicial.pHp?nome=" . $lista[1];
+            ?>
+
+            <tr>
+              <th><a href="<?php echo $link; ?>">  <?php echo $lista[1]; ?> </a> </th> 
+              <th>0</th>
+            </tr>
+
+            <?php
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
 
-    
+
   </div>
 
 
-<br><br><br>
-<br><br><br>
-<br>
+  <br><br><br>
+  <br><br><br>
+  <br>
   <?php require_once "Recursos/footer.php"; ?>
 
 </body>
