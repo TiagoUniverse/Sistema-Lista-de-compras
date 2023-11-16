@@ -1,0 +1,4 @@
+$_SESSION['idPessoa'] = $Pessoa[0];
+        $_SESSION['nomePessoa'] = $Pessoa[1];
+        $_SESSION['emailPessoa'] = $Pessoa[2];
+        $_SESSION['logado'] = "LOGADO";
