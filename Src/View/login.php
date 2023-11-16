@@ -7,6 +7,14 @@
 
 require_once "conexao.php";
 
+// Pessoas Section
+require_once "../Model/Pessoas_repositorio.php";
+
+use model\Pessoas_repositorio;
+
+$Pessoas_repositorio = new Pessoas_repositorio();
+$Pessoas_repositorio->login("tiagocesar68@gmail.com", "tiago123", $pdo);
+
 ?>
 
 <!DOCTYPE html>
