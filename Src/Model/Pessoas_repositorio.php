@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe: Pessoas_repositorio.php
  * Descrição: Repositorio da classe Pessoas
@@ -6,27 +7,33 @@
  */
 
 
- namespace Model;
+namespace Model;
 
 use \PDO;
 
-class Pessoas_repositorio{
+class Pessoas_repositorio
+{
 
     // Função para efetuar o login do usuário
-    function login ($email, $senha, $pdo){
+    function login($email, $senha, $pdo)
+    {
         $stmt = $pdo->prepare("Select * from Pessoas where status = 'ATIVO' and email = :email and senha = sha1( :senha )   ");
 
         $stmt->execute(array(
             ":email" => $email,
             ":senha" => $senha
         ));
-        var_dump($stmt);
 
-        while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)){
-            echo $linha['email'];
+        $Pessoa = array();
+        while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $id = $linha['id'];
+            $nome = $linha['nome'];
+            $email = $linha['email'];
+            $status = $linha['status'];
+            $created = $linha['created'];
+
+            $Pessoa = array($id, $nome, $email, $status, $created);
         }
+        return $Pessoa;
     }
-
-
- }
-
+}
