@@ -35,22 +35,33 @@
   </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../Assets/js/materialize.js"></script>
 
-<!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="../../Assets/js/materialize.js"></script>
-<script src="../../Assets/js/init.js"></script>
-
-  <!-- Modal de confirmação -->
+  <!-- Inicialização do MaterializeCSS -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems, options);
+      M.AutoInit();
+    });
+  </script>
+
+
+  <!-- Inicialização do Modal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems, {});
     });
 
-    // Or with jQuery
-
-    $(document).ready(function() {
-        $('.modal').modal();
+    // Inicialização do Dropdown
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var instances = M.Dropdown.init(elems, {});
     });
-</script>
+
+    // Inicialização do Form Select
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems, {});
+    });
+  </script>
