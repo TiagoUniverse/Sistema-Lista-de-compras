@@ -20,6 +20,15 @@ $Lista_repositorio = new Lista_repositorio();
 $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
 
 
+// Itens
+require_once "../Model/Itens_repositorio.php";
+
+use model\Itens_repositorio;
+
+$Itens_repositorio = new Itens_repositorio();
+
+
+require_once "Recursos/scripts.php";
 ?>
 
 <!DOCTYPE html>
@@ -66,13 +75,16 @@ $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
         <tbody>
           <?php
           foreach ($Listas_array as $lista) {
+            $itens = $Itens_repositorio->consultar_ByIdLista($lista[0], $pdo);
+
+
             $link = "lista_tela-inicial.pHp?nome=" . $lista[1];
             $modalId = 'modal-' . $lista[0]; // Unique ID for each modal
           ?>
 
             <tr>
               <td><a href="<?php echo $link; ?>"> <?php echo $lista[1]; ?> </a> </td>
-              <td>0</td>
+              <td><?php echo count($itens); ?></td>
               <td>
                 <!-- Modal Trigger -->
                 <a class='waves-effect #ef5350 red lighten-1 btn modal-trigger' href='#<?php echo $modalId; ?>'>Excluir</a>

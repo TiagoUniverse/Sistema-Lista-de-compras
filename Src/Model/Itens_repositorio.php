@@ -102,6 +102,29 @@ class Itens_repositorio
             echo $e->getMessage();
         }
     }
+ 
+    // Função para consultar através do id
+    function consultar_ByIdLista($idLista, $pdo)
+    {
+        try {
+            $stmt = $pdo->prepare("Select * from itens where status = 'ATIVO' and idLista = :idLista  ");
+
+            $stmt->execute(array(
+                ":idLista" => $idLista
+            ));
+
+            $Lista = array();
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $id = $linha['id'];
+                $nome = $linha['nome'];
+
+                $Lista = array($id, $nome);
+            }
+            return $Lista;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
       // Função para listar os itens de uma lista
       function listar_itens_lista($idlista, $pdo)

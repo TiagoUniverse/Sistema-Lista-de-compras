@@ -36,6 +36,7 @@ if (isset($_POST['status_cadastro']) && $_POST['status_cadastro'] == "CADASTRAND
 
 }
 
+require_once "Recursos/scripts.php";
 ?>
 
 <!DOCTYPE html>
