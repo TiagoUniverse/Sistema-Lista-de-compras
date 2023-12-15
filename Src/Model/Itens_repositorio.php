@@ -118,7 +118,7 @@ class Itens_repositorio
                 $id = $linha['id'];
                 $nome = $linha['nome'];
 
-                $Lista = array($id, $nome);
+                $Lista[] = array($id, $nome);
             }
             return $Lista;
         } catch (\PDOException $e) {
