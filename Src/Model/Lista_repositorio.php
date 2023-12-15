@@ -122,6 +122,28 @@ class Lista_repositorio
         }
     }
 
+    // Função para excluir uma lista
+    function alterar($idLista, $nome, $pdo)
+    {
+        try {
+            $stmt = $pdo->prepare("Update Lista
+            SET
+                updated = now(),
+                nome = :nome
+            Where
+                id = :idLista ");
+
+            $stmt->execute(array(
+                ":idLista" => $idLista,
+                ":nome" => $nome
+            ));
+
+            return true;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // Função para listar
     function listar($idPessoa, $pdo)
     {

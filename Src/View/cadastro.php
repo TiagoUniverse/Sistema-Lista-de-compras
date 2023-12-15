@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Classe: login
- * Descrição: Tela de login
+ * Classe: cadastro
+ * Descrição: Tela de cadastro de listas
  * Data: 15/11/23
  */
 
@@ -84,7 +84,7 @@ require_once "Recursos/scripts.php";
           <input type="hidden" name="status_cadastro" value="CADASTRANDO UMA LISTA">
           <div class="row">
             <div class="input-field col s12">
-              <input id="nome" type="text" name="nome" class="validate">
+              <input id="nome" required type="text" name="nome" class="validate">
               <label for="nome">Nome da lista:</label>
             </div>
           </div>

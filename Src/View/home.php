@@ -100,6 +100,7 @@ require_once "Recursos/scripts.php";
           <tr>
             <th>Nome</th>
             <th>Quantidade de itens</th>
+            <th>Alterar</th>
             <th>Excluir</th>
           </tr>
         </thead>
@@ -116,6 +117,13 @@ require_once "Recursos/scripts.php";
             <tr>
               <td><a href="<?php echo $link; ?>"> <?php echo $lista[1]; ?> </a> </td>
               <td><?php echo count($itens); ?></td>
+              
+              <td>
+                <form action="alterar.php" method="post">
+                  <input type="hidden" name="idLista" value="<?php echo $lista[0]; ?>"> 
+                  <button class="waves-effect #ef5350  lighten-1 btn">Alterar</button>
+                </form>
+              </td>
               <td>
                 <!-- Modal Trigger -->
                 <a class='waves-effect #ef5350 red lighten-1 btn modal-trigger' href='#<?php echo $modalId; ?>'>Excluir</a>
