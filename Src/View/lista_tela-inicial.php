@@ -27,6 +27,9 @@ use model\Itens_repositorio;
 
 $Itens_repositorio = new Itens_repositorio();
 
+
+require_once "Recursos/scripts.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -53,36 +56,66 @@ $Itens_repositorio = new Itens_repositorio();
     $quantidade = $_POST['quantidade'];
     $descricao = $_POST['descricao'];
 
-    $ja_existe = $Itens_repositorio->ja_existe($nome, $quantidade, $descricao, $pdo);
+    $ja_existe = $Itens_repositorio->ja_existe($nome, $quantidade, $descricao, $Lista[0], $pdo);
 
     if ($ja_existe) {
-    } else {
-    }
   ?>
-    <script>
-      M.toast({
-        html: 'Cadastro de grupo de projeto com sucesso!'
-      });
-    </script>
+      <script>
+        M.toast({
+          html: 'Este item já existe na lista!'
+        });
+      </script>
 
-  <?php
+    <?php
+    } else {
+      $Itens_repositorio->cadastro($nome, $quantidade, $descricao, $Lista[0], $pdo);
+    ?>
+      <script>
+        M.toast({
+          html: 'Item adicionado com sucesso!'
+        });
+      </script>
+
+    <?php
+    }
   }
 
+  // Removendo um item da lista
+  if (isset($_POST['botao_excluir']) && $_POST['botao_excluir'] == "EXCLUINDO UM ITEM") {
+    // $ja_existe = $Itens_repositorio->ja_existe($nome, $quantidade, $descricao, $Lista[0], $pdo);
+    $ja_existe = $Itens_repositorio->consultar_ByID($_POST['idItem'], $pdo);
 
+    if ($ja_existe != null) {
+
+      $Itens_repositorio->excluir($_POST['idItem'], $pdo);
+    ?>
+      <script>
+        M.toast({
+          html: 'Item excluído da lista com sucesso!'
+        });
+      </script>
+
+    <?php
+    } else {
+    ?>
+      <script>
+        M.toast({
+          html: 'Este item já foi excluído!'
+        });
+      </script>
+
+  <?php
+    }
+  }
+
+  // Puxando as informações de itens da lista
+  $itens = $Itens_repositorio->listar_itens_lista($Lista[0], $pdo);
   ?>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      M.toast({
-        html: 'Cadastro de grupo de projeto com sucesso!'
-      });
-    });
-  </script>
-
-
 
 
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+      <a href="home.php">Voltar</a>
       <br><br>
       <h1 class="header center orange-text"><?php echo $Lista[1]; ?></h1>
       <div class="row center">
@@ -102,6 +135,39 @@ $Itens_repositorio = new Itens_repositorio();
             </tr>
           </thead>
           <tbody>
+            <?php
+            foreach ($itens as $itens) {
+              $modalId = "modal" . $itens[0];
+              echo "<tr>";
+              echo "<td> " . $itens[1] . " </td>";
+              echo "<td> " . $itens[2] . " </td>";
+              echo "<td> " . $itens[3] . " </td>";
+            ?>
+              <td>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn red modal-trigger" href="#<?php echo $modalId; ?>">Excluir</a>
+
+                <!-- Modal Structure -->
+                <div id="<?php echo $modalId; ?>" class="modal">
+                  <div class="modal-content">
+                    <h4>Excluir item da lista</h4>
+                    <p><?php echo "Você está prestes a excluir o item <a>" . $itens[1] . "</a> da lista. Você tem certeza?" ?></p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                    <form action="lista_tela-inicial.php" method="post" style="display:inline;">
+                    <input type="hidden" name="idItem" value="<?php echo $itens[0]; ?>">
+                      <button name="botao_excluir" value="EXCLUINDO UM ITEM" class="modal-close waves-effect waves-green red btn-flat">Excluir</button>
+                    </form>
+                  </div>
+                </div>
+              </td>
+            <?php
+              echo "</tr>";
+            }
+            ?>
+
+            <!-- Adicionar itens -->
             <?php $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . ""; ?>
             <form action="<?php echo $link; ?>" method="post">
               <td>
@@ -137,8 +203,6 @@ $Itens_repositorio = new Itens_repositorio();
   <br><br><br>
   <br>
   <?php require_once "Recursos/footer.php"; ?>
-
-  
 
 </body>
 
