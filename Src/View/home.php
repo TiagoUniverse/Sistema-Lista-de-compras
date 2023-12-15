@@ -92,8 +92,6 @@ require_once "Recursos/scripts.php";
       </div>
       <br><br>
 
-
-
       <br>
       <table>
         <thead>

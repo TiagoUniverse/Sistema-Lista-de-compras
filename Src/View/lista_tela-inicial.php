@@ -28,13 +28,15 @@ use model\Itens_repositorio;
 $Itens_repositorio = new Itens_repositorio();
 
 
+
 require_once "Recursos/scripts.php";
 
-$link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . ""; 
+$link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -43,9 +45,11 @@ $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="../../Assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="../../Assets/css/materialize.css" type="text/css" rel="stylesheet"  media="all"/>
+  <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet"  media="all"/>
+  <link href="../../Assets/css/print.css" type="text/css" rel="stylesheet"  media="all"/>
   <link rel="icon" type="image/x-icon" href="../../Assets/Img/list-icon.png">
+
 </head>
 
 <body>
@@ -122,6 +126,7 @@ $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
       <h1 class="header center orange-text"><?php echo $Lista[1]; ?></h1>
       <div class="row center">
         <h5 class="header col s12 light">Informe os itens da lista logo abaixo</h5>
+        <button class="waves-effect #ef5350  lighten-1 btn" onClick="window.print()">Imprimir</button>
       </div>
 
 
@@ -158,7 +163,7 @@ $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
                   <div class="modal-footer">
                     <a href="#" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     <form action="<?php echo $link; ?>" method="post" style="display:inline;">
-                    <input type="hidden" name="idItem" value="<?php echo $itens[0]; ?>">
+                      <input type="hidden" name="idItem" value="<?php echo $itens[0]; ?>">
                       <button name="botao_excluir" value="EXCLUINDO UM ITEM" class="modal-close waves-effect waves-green red btn-flat">Excluir</button>
                     </form>
                   </div>
@@ -170,7 +175,7 @@ $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
             ?>
 
             <!-- Adicionar itens -->
-            
+
             <form action="<?php echo $link; ?>" method="post">
               <td>
                 <div class="input-field col s12">
@@ -190,7 +195,7 @@ $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . "";
                   <label for="descricao">Descrição:</label>
                 </div>
               </td>
-              <td> <button name="botao_adicionar" value="ADICIONANDO NA LISTA" class="waves-effect #ef5350  lighten-1 btn ">Adicionar</button> </td>
+              <td> <button name="botao_adicionar" value="ADICIONANDO NA LISTA" class="waves-effect #ef5350  lighten-1 btn">Adicionar</button> </td>
             </form>
           </tbody>
         </table>
