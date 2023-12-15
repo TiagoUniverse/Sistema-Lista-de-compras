@@ -17,9 +17,6 @@ use model\Lista_repositorio;
 
 $Lista_repositorio = new Lista_repositorio();
 
-$Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
-
-
 // Itens
 require_once "../Model/Itens_repositorio.php";
 
@@ -40,7 +37,7 @@ require_once "Recursos/scripts.php";
   <title>Tela inicial</title>
 
   <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../Assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link rel="icon" type="image/x-icon" href="../../Assets/Img/list-icon.png">
@@ -48,6 +45,40 @@ require_once "Recursos/scripts.php";
 
 <body>
   <?php require_once "Recursos/navBar.php"; ?>
+
+  <?php
+  // Adicionando itens na lista
+  if (isset($_POST['botao_exclusao']) && $_POST['botao_exclusao'] == "EXCLUINDO UMA LISTA") {
+    $ja_existe = $Lista_repositorio->consultar_ById($_POST['idLista'], $pdo);
+
+    if ($ja_existe != null) {
+
+      $Lista_repositorio->excluir($_POST['idLista'], $pdo);
+
+  ?>
+      <script>
+        M.toast({
+          html: 'Lista deletada com sucesso!'
+        });
+      </script>
+
+    <?php
+    } else {
+    ?>
+      <script>
+        M.toast({
+          html: 'Esta lista já foi excluída!'
+        });
+      </script>
+
+  <?php
+    }
+  }
+
+  // Informações das listas
+  $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
+
+  ?>
 
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -98,10 +129,9 @@ require_once "Recursos/scripts.php";
 
                   <div class='modal-footer'>
                     <a href='#!' class='modal-close waves-effect waves-green btn-flat' style="display:inline;">Cancelar</a>
-                    <form action='meusGrupos.php' method='post' class='exclusao-form' style="display:inline;">
-                      <input type='hidden' name='status_exclusao' value='EXCLUINDO Lista'>
-                      <input type='hidden' name='nomeGrupo' value="<?php echo $lista[0]; ?>">
-                      <button type='submit' class='modal-close #ef5350 red lighten-1 btn-flat'>Deletar</button>
+                    <form action='home.php' method='post' class='exclusao-form' style="display:inline;">
+                      <input type='hidden' name='idLista' value="<?php echo $lista[0]; ?>">
+                      <button type='submit' name="botao_exclusao" value="EXCLUINDO UMA LISTA" class='modal-close #ef5350 red lighten-1 btn-flat'>Deletar</button>
                     </form>
                   </div>
                 </div>

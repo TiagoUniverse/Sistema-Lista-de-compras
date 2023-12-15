@@ -59,6 +59,7 @@ require_once "Recursos/scripts.php";
 
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
+      <a href="home.php">Voltar</a>
       <br><br>
       <h1 class="header center orange-text">Cadastro de nova lista</h1>
 
