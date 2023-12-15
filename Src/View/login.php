@@ -71,6 +71,7 @@ if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONT
     <link rel="stylesheet" type="text/css" href="../../Assets/css/util.css">
     <link rel="stylesheet" type="text/css" href="../../Assets/css/main.css">
     <!--===============================================================================================-->
+    <link rel="icon" type="image/x-icon" href="../../Assets/Img/list-icon.png">
 </head>
 
 <body>

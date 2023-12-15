@@ -31,9 +31,10 @@ $Listas_array = $Lista_repositorio->listar($_SESSION['idPessoa'], $pdo);
   <title>Tela inicial</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../Assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Img/list-icon.png">
 </head>
 
 <body>

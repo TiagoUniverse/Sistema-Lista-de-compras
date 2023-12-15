@@ -30,6 +30,7 @@ $Itens_repositorio = new Itens_repositorio();
 
 require_once "Recursos/scripts.php";
 
+$link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . ""; 
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +45,7 @@ require_once "Recursos/scripts.php";
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../Assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <link href="../../Assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel="icon" type="image/x-icon" href="../../Assets/Img/list-icon.png">
 </head>
 
 <body>
@@ -155,7 +157,7 @@ require_once "Recursos/scripts.php";
                   </div>
                   <div class="modal-footer">
                     <a href="#" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                    <form action="lista_tela-inicial.php" method="post" style="display:inline;">
+                    <form action="<?php echo $link; ?>" method="post" style="display:inline;">
                     <input type="hidden" name="idItem" value="<?php echo $itens[0]; ?>">
                       <button name="botao_excluir" value="EXCLUINDO UM ITEM" class="modal-close waves-effect waves-green red btn-flat">Excluir</button>
                     </form>
@@ -168,7 +170,7 @@ require_once "Recursos/scripts.php";
             ?>
 
             <!-- Adicionar itens -->
-            <?php $link = "lista_tela-inicial.php?nome=" . $_GET['nome'] . ""; ?>
+            
             <form action="<?php echo $link; ?>" method="post">
               <td>
                 <div class="input-field col s12">

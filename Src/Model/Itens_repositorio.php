@@ -63,7 +63,7 @@ class Itens_repositorio
     function excluir($idItem, $pdo)
     {
         try {
-            $stmt = $pdo->prepare("Update iten
+            $stmt = $pdo->prepare("Update itens
             SET
                 updated = now(),
                 status ='INATIVO'
