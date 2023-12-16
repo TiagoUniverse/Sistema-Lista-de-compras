@@ -107,7 +107,6 @@ require_once "Recursos/scripts.php";
           foreach ($Listas_array as $lista) {
             $itens = $Itens_repositorio->consultar_ByIdLista($lista[0], $pdo);
 
-            var_dump($itens);
 
             $link = "lista_tela-inicial.pHp?nome=" . $lista[1];
             $modalId = 'modal-' . $lista[0]; // Unique ID for each modal

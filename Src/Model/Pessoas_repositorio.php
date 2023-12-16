@@ -40,4 +40,42 @@ class Pessoas_repositorio
             echo $e->getMessage();
         }
     }
+
+    // Função para efetuar o cadastro de uma nova conta
+    function cadastro($email, $senha, $pdo)
+    {
+        try {
+            $stmt = $pdo->prepare("Insert INTO Pessoas 
+            SET email = :email ,
+             senha = sha1( :senha )   ");
+
+            $stmt->execute(array(
+                ":email" => $email,
+                ":senha" => $senha
+            ));
+
+            return true;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+   
+    // Função para verificar se uma conta já existe
+    function ja_existe($email, $pdo)
+    {
+        try {
+            $stmt = $pdo->prepare("Select * from Pessoas where status = 'ATIVO' and email = :email  ");
+
+            $stmt->execute(array(
+                ":email" => $email
+            ));
+
+            while ($linha = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+               return true;
+            }
+            return false;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

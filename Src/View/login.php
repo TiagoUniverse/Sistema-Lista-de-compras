@@ -8,9 +8,9 @@
 
 require_once "conexao.php";
 
-if (isset($_SESSION['logado']) && $_SESSION['logado'] == "LOGADO"){
+if (isset($_SESSION['logado']) && $_SESSION['logado'] == "LOGADO") {
     header("Location: home.php");
- }
+}
 
 // Pessoas Section
 require_once "../Model/Pessoas_repositorio.php";
@@ -36,10 +36,23 @@ if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONT
         $_SESSION['logado'] = "LOGADO";
 
         header("Location:home.php");
-
     }
 }
 
+
+if (isset($_POST['status_cadastro']) && $_POST['status_cadastro'] == "FINALIZANDO O CADASTRO DE CONTA") {
+    $email = $_POST['email'];
+    $senha = $_POST['pass'];
+    $validacao_cadastro = false;
+
+    $ja_existe = $Pessoas_repositorio->ja_existe($email, $pdo);
+
+    if (!$ja_existe) {
+        $validacao_cadastro = true;
+
+        $Pessoas_repositorio->cadastro($email, $senha, $pdo);
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -79,17 +92,73 @@ if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONT
     <div class="limiter">
         <div class="container-login100" style="background-image: url('../../Assets/Img/bg-01.jpg');">
             <div class="wrap-login100">
-                <form action="login.php" method="POST" class="login100-form validate-form">
-                    <input type="hidden" name="status_login" value="ACESSANDO A CONTA">
-                    <span class="login100-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
-                    </span>
 
+                <span class="login100-form-logo">
+                    <i class="zmdi zmdi-landscape"></i>
+                </span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Sistema de Lista de Compras
+                </span>
+
+                <?php
+
+                if (isset($_POST['botao_conta']) && $_POST['botao_conta'] == "Adicionando nova conta") {
+                ?>
+
+                    <a href="login.php">Voltar</a>
                     <span class="login100-form-title p-b-34 p-t-27">
-                        Sistema de Lista de Compras
+                        Cadastro de nova conta
                     </span>
 
                     <?php
+                    if (isset($validacao_cadastro)) {
+                        if ($validacao_cadastro == false) {
+                    ?>
+                            <span class="login100-form-title p-b-34 p-t-27">
+                                Esta conta já foi cadastrada no sistema.
+                            </span>
+                        <?php
+                        } else {
+                        ?>
+                            <span class="login100-form-title p-b-34 p-t-27">
+                                Conta criada com sucesso!
+                            </span>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                    <form action="login.php" method="POST" class="login100-form validate-form">
+                        <input type="hidden" name="botao_conta" value="Adicionando nova conta">
+                        <input type="hidden" name="status_cadastro" value="FINALIZANDO O CADASTRO DE CONTA">
+                        <div class="wrap-input100 validate-input" data-validate="Enter username">
+                            <input class="input100" type="email" name="email" required placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="pass" required placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <!-- <div class="contact100-form-checkbox">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <label class="label-checkbox100" for="ckb1">
+                                    Remember me
+                                </label>
+                            </div> -->
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Cadastrar
+                            </button>
+                        </div>
+                    </form>
+
+
+                    <?php
+                } else {
                     if ($login_sucesso == false) {
                     ?>
                         <span class="login100-form-title p-b-34 p-t-27">
@@ -98,36 +167,49 @@ if (isset($_POST['status_login']) && $_POST['status_login'] == "ACESSANDO A CONT
                     <?php
                     }
                     ?>
+                    <form action="login.php" method="POST" class="login100-form validate-form">
+                        <input type="hidden" name="status_login" value="ACESSANDO A CONTA">
+                        <div class="wrap-input100 validate-input" data-validate="Enter username">
+                            <input class="input100" type="email" name="email" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter username">
-                        <input class="input100" type="email" name="email" placeholder="Email">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                    </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="pass" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" name="pass" placeholder="Password">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                    </div>
+                        <!-- <div class="contact100-form-checkbox">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <label class="label-checkbox100" for="ckb1">
+                                    Remember me
+                                </label>
+                            </div> -->
 
-                    <!-- <div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div> -->
-
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
-                            Acessar
-                        </button>
-                    </div>
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Acessar
+                            </button>
+                        </div>
+                    </form>
 
                     <div class="text-center p-t-90">
+                        <form action="login.php" method="post">
+                            <button name="botao_conta" value="Adicionando nova conta">Criar conta </button>
+                        </form>
                         <a class="txt1" href="#">
-                            Esqueceu a senha?
+                            Criar conta
                         </a>
+                        <!-- <br><a class="txt1" href="#">
+                                    Esqueceu a senha?
+                                </a> -->
                     </div>
-                </form>
+                <?php
+                }
+                ?>
+
+
+
             </div>
         </div>
     </div>
